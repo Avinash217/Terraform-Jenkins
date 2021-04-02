@@ -53,8 +53,8 @@ EOF
 resource "aws_dlm_lifecycle_policy" "ec2volume" {
   description        = "ec2volume lifecycle policy"
   execution_role_arn = aws_iam_role.ec2volume_lifecycle_role.arn
-  state              = "ENABLED"
-  #state              = "DISABLED"
+  #state              = "ENABLED"
+  state              = "DISABLED"
 
   policy_details {
     resource_types = ["VOLUME"]
