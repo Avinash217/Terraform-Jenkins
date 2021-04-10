@@ -13,21 +13,21 @@ vpc_security_group_ids = [ "${aws_security_group.Testing_TerrafomNew.id}" ]
 associate_public_ip_address = true
 #vpc_security_group_ids = ["sg-06b55d72ae47952a6"]
 user_data = <<-EOF
-            #!/bin/bash
-            sudo yum update -y
-            sudo yum install httpd -y
-            echo "WEB SERVER STARTED SUCCESSFULLY" > /var/www/html/index.html
-            sudo yum update
-            sudo yum install -y amazon-linux-extras
-            sudo amazon-linux-extras enable php7.4
-      	    sudo yum clean metadata
-	    sudo yum install php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap}
-	    sudo chown -R ec2-user:apache /var/www
-	    sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
-	    find /var/www -type f -exec sudo chmod 0664 {} \;
-	    sudo echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
-	    sudo service httpd enable
-            sudo service httpd start
+	    #!/bin/bash
+sudo yum update -y
+sudo yum install httpd -y
+echo "WEB SERVER STARTED SUCCESSFULLY" > /var/www/html/index.html
+sudo yum update
+sudo yum install -y amazon-linux-extras
+sudo amazon-linux-extras enable php7.4
+sudo yum clean metadata
+sudo yum install php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap}
+sudo chown -R ec2-user:apache /var/www
+sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
+find /var/www -type f -exec sudo chmod 0664 {} \;
+sudo echo "<?php phpinfo(); ?>" > /var/www/html/phpinfo.php
+sudo service httpd enable
+sudo service httpd restart
             EOF
 
 tags = {
