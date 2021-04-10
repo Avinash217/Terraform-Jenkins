@@ -14,11 +14,12 @@ associate_public_ip_address = true
 #vpc_security_group_ids = ["sg-06b55d72ae47952a6"]
 user_data = <<-EOF
             #!/bin/bash
-            sudo apt-get update -y
-            sudo apt-get install apache2 -y
+            sudo yum update -y
+            sudo yum install httpd -y
             echo "WEB SERVER STARTED SUCCESSFULLY" > /var/www/html/index.html
-            sudo apt-get update
-            sudo service apache2 enable
+            sudo yum update
+            sudo service httpd enable
+            sudo service httpd start
             EOF
 
 tags = {
