@@ -1,37 +1,33 @@
 
-
-#provider "aws" {
-#access_key = "AKIAT6XMA3K3ENNNGDAM"
-#secret_key = "IPLWygvAM21mskbakoPm0yI1n2JnfgcufEEnSYDD"
-#region = "us-east-1"
-#}
+##EC2.tf FILE
 
 resource "aws_instance" "example" {
 ami = "ami-02354e95b39ca8dec"
 instance_type = "t2.micro"
 key_name = "Amazon Linux2"
 count = 1
-#security_groups = [ "Amazon Linux2-SG" ] 	#add existing security group
-#security_groups = [
-#        "${aws_security_group.sg.id}"
 
 
-#subnet_id = "${aws_subnet.TFPublic.name}"
 subnet_id = "${aws_subnet.TFPublic.id}"
-#subnet_id = "subnet-067ab45325ce7a36d"
-#vpc_security_group_ids = [ "${aws_security_group.terra-vm-SG.id}" ]
 vpc_security_group_ids = [ "${aws_security_group.Testing_TerrafomNew.id}" ]
 associate_public_ip_address = true
 #vpc_security_group_ids = ["sg-06b55d72ae47952a6"]
-
-#security_groups = [ 
-#	"${aws_security_group.terra-vm-SG.name}" 
-#]
+user_data = <<-EOF
+            #!/bin/bash
+            sudo apt-get update -y
+            sudo apt-get install apache2 -y
+            echo "WEB SERVER STARTED SUCCESSFULLY" > /var/www/html/index.html
+            sudo apt-get update
+            sudo service apache2 enable
+            EOF
 
 tags = {
 Name = "Testing TerrafomNew"
 }
 }
+
+
+
 #resource "aws_security_group" "terra-vm-SG" {
 resource "aws_security_group" "Testing_TerrafomNew" {
 vpc_id = "${aws_vpc.TFmain.id}"

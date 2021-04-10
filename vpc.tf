@@ -1,4 +1,4 @@
-
+#####VPC.tf FILE
 #IGW
 
 resource "aws_internet_gateway" "igw" {
@@ -50,16 +50,6 @@ resource "aws_subnet" "TFPrivate2" {
 }
 
 
-#resource "aws_db_subnet_group" "default" {
- # name       = "main"
-  #subnet_ids = [aws_subnet.TFPrivate2.id, aws_subnet.TFPrivate2.id]
-  #vpc_id = "${aws_vpc.TFmain.id}"
-  #tags = {
-   # Name = "My DB subnet group"
-  #}
-
-#}
-
 #Subnet Association
 resource "aws_route_table_association" "a" {
   subnet_id      = "${aws_subnet.TFPublic.id}"
@@ -107,26 +97,26 @@ resource "aws_route_table" "TFPrivateRTB" {
 }
 ##Creating An Elastic IP for NAT Gateway
 
-resource "aws_eip" "elastic-ip-for-nat-gw" {
-    vpc = true
-    associate_with_private_ip = "11.0.2.5"
-        tags = {
-            Name = "Production-EIP"
-            }
-}
+#resource "aws_eip" "elastic-ip-for-nat-gw" {
+ #   vpc = true
+  #  associate_with_private_ip = "11.0.2.5"
+   #     tags = {
+    #        Name = "Production-EIP"
+     #       }
+#}
 
 ##Creating the NAT GateWay and Adding to Route Table
 
-resource "aws_nat_gateway" "nat-gw" {
-    allocation_id = "${aws_eip.elastic-ip-for-nat-gw.id}"
-    subnet_id = "${aws_subnet.TFPublic.id}"
-        tags = {
-            Name = "Production-NAT-GW"
-            }
-}
+#resource "aws_nat_gateway" "nat-gw" {
+ #   allocation_id = "${aws_eip.elastic-ip-for-nat-gw.id}"
+ #   subnet_id = "${aws_subnet.TFPublic.id}"
+ #       tags = {
+  #          Name = "Production-NAT-GW"
+   #         }
+#}
 
-resource "aws_route" "nat-gw-route" {
-    route_table_id = "${aws_route_table.TFPrivateRTB.id}"
-    nat_gateway_id = "${aws_nat_gateway.nat-gw.id}"
-    destination_cidr_block = "0.0.0.0/0"
-}
+#resource "aws_route" "nat-gw-route" {
+#    route_table_id = "${aws_route_table.TFPrivateRTB.id}"
+ #   nat_gateway_id = "${aws_nat_gateway.nat-gw.id}"
+  #  destination_cidr_block = "0.0.0.0/0"
+#}
