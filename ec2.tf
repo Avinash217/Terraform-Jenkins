@@ -21,7 +21,7 @@ sudo yum update
 sudo yum install -y amazon-linux-extras
 sudo amazon-linux-extras enable php7.4
 sudo yum clean metadata
-sudo yum install php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap}
+sudo yum install php php-{pear,cgi,common,curl,mbstring,gd,mysqlnd,gettext,bcmath,json,xml,fpm,intl,zip,imap} -y
 sudo chown -R ec2-user:apache /var/www
 sudo chmod 2775 /var/www && find /var/www -type d -exec sudo chmod 2775 {} \;
 find /var/www -type f -exec sudo chmod 0664 {} \;
