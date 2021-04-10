@@ -5,7 +5,7 @@ if [ $choice = "plan" ]
 then
 terraform plan
 
-else [ $choice = "apply" ]
+elif [ $choice = "apply" ]
 terraform apply -auto-approve
 
 elif [ $choice = "apply" ]
