@@ -9,7 +9,7 @@ elif [ $choice = "apply" ]
 then
 terraform apply -auto-approve
 
-elif [ $choice = "apply" ]
+elif [ $choice = "destroy" ]
 then
 terraform destroy -auto-approve
 fi
